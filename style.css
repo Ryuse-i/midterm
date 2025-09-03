@@ -1,11 +1,13 @@
 body{
  background-color: black;
+ font-family: sans-serif;
 }
 
 #Form-head{
     color: white;
     text-align: center;
     margin-top: 200px;
+    font-family: inherit;
 }
 
 

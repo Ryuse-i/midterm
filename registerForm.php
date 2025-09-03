@@ -13,14 +13,19 @@
     </div>
     
     <form action="register.php" method="POST">
-<label for="name">Name</label> <br>
-<input type="text" name="name" placeholder="Full Name" required><br><br>
-<label for="email">Email</label> <br>
-<input type="email" name="email" placeholder="email@example.com" required><br><br>
-<label for="password">Password</label> <br>
-<input type="password" name="password" placeholder="Password" required><br><br>
-<button type="submit">Register</button> 
-</form>
+        <label for="name">Name</label> <br>
+        <input type="text" name="name" placeholder="Full Name" required><br><br>
+        <label for="email">Email</label> <br>
+        <input type="email" name="email" placeholder="email@example.com" required><br><br>
+        <label for="password">Password</label> <br>
+        <input type="password" name="password" placeholder="Password" 
+        required
+        minlength="8" 
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}"
+        title="Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
+        ><br><br>
+        <button type="submit">Log In</button> 
+    </form>
 
 </body>
 </html>
