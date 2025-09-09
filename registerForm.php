@@ -48,16 +48,6 @@ if (isset($_GET['user'])) {
     <title>REGISTER FORM</title>
 </head>
 <body>
-
-    <script src="toaster.js"></script>
-    <script>
-        <?php if (isset($toastMessage) && $toastMessage): ?>
-            document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
-            });
-        <?php endif; ?>
-    </script>
-
     <div id="Form-head">
         <h1>Register your account</h1>
         <p>Enter your details below to Register your account</p>
@@ -83,7 +73,14 @@ if (isset($_GET['user'])) {
         <p id="display-validation_message">hatdog</p>
     </div>
 
-    <script src="function.js"></script>
+    <script src="toaster.js"></script>
+    <script>
+        <?php if (isset($toastMessage) && $toastMessage): ?>
+            document.addEventListener("DOMContentLoaded", () => {
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+            });
+        <?php endif; ?>
+    </script>
 
 </body>
 </html>
