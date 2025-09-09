@@ -1,6 +1,7 @@
 body{
- background-color: black;
+ background-color: rgb(0, 0, 0);
  font-family: sans-serif;
+ margin: 0px;
 }
 
 #Form-head{
@@ -26,18 +27,57 @@ p{
     font-size: 20px;
 }
 
-input{
-    width: 100%;
-    padding: 10px;
-    background-color: rgb(46, 46, 46);
-    border-radius: 10px;
-    font-size: 20px;
+input[type="password"],
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(71, 69, 69) !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-button{
+/* Fix autofill colors */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(71, 69, 69) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+#submit-form{
     background-color: white;
     width: 105%;
     height: 40px;
     border-radius: 10px;
     font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+#submit-form:hover{
+    transform: scale(1.06);
+    background-color: rgb(217, 204, 204);
+}
+
+
+#display-validation {
+    width: 300px;
+    background-color: rgb(26, 204, 13);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 10px;
+    position: fixed;          /* stick it on screen */
+    bottom: -200px;           /* start hidden below */
+    right: 100px;
+    border-radius: 6px;
+    transition: bottom 0.3s ease; 
+    border: 2px solid white;
+}
+
+
+#display-validation.display-validation_message_push {
+    bottom: 100px; /* move it up into view */
 }
