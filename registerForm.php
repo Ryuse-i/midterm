@@ -73,7 +73,7 @@ if (isset($_GET['user'])) {
         <p id="display-validation_message">hatdog</p>
     </div>
 
-    <script src="toaster.js"></script>
+    <script src="function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?>
             document.addEventListener("DOMContentLoaded", () => {

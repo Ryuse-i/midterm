@@ -7,7 +7,7 @@ body{
 #Form-head{
     color: white;
     text-align: center;
-    margin-top: 200px;
+    margin-top: 100px;
     font-family: inherit;
 }
 
@@ -68,7 +68,7 @@ input:-webkit-autofill {
     background-color: rgb(26, 204, 13);
     color: rgb(255, 255, 255);
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     position: fixed;          /* stick it on screen */
     bottom: -200px;           /* start hidden below */
     right: 100px;
@@ -79,5 +79,5 @@ input:-webkit-autofill {
 
 
 #display-validation.display-validation_message_push {
-    bottom: 100px; /* move it up into view */
+    bottom: 50px; /* move it up into view */
 }
