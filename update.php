@@ -27,9 +27,16 @@
             $statement->bindValue(':id', $id, PDO::PARAM_INT);
             $statement->execute();
 
-            header('Location: dashboard.php?action=update_success');
+            $rows = $statement->rowCount();
         }catch(PDOException $error){
             die("ERROR: " . $error->getMessage());
+        }
+
+        if($rows > 0){
+            header('Location: dashboard.php?action=update_success');
+        }
+        elseif($rows === 0){
+            header('Location: dashboard.php?action=update_success');
         }
     }
 ?>
