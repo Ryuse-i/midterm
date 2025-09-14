@@ -39,7 +39,7 @@
                 'email' => $user['email']
             ];
 
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
         }
         else{

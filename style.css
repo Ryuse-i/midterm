@@ -81,3 +81,11 @@ input:-webkit-autofill {
 #display-validation.display-validation_message_push {
     bottom: 50px; /* move it up into view */
 }
+
+
+table, td, th{
+    border: 1px solid white;
+    color: white;
+    border-collapse: collapse;
+    padding: 10px;
+}

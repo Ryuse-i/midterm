@@ -74,7 +74,7 @@
                     'email' => $hashedPassword
                 ];
 
-                header('Location: index.php');
+                header('Location: dashboard.php');
                 exit;
             }catch(PDOException $error){
                 die("ERROR: " . $error->getMessage());
