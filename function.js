@@ -2,13 +2,22 @@ function toasterDisplay(message, type) {
     let toaster = document.getElementById('display-validation');
     let toasterMessage = document.getElementById('display-validation_message');
 
-    // show immediately
-    toaster.classList.add("display-validation_message_push");
     toasterMessage.innerHTML = message;
 
+    toaster.classList.remove("display-validation_message");
+
+    setTimeout(() => {
+        toaster.classList.add("display-validation_message");
+        toaster.classList.add("display-validation_message_push");
+    }, 100); 
+    
+
+    // set background color based on type
     if (type === "error") {
         toaster.style.backgroundColor = "red"; // error message
-    } else {
+    } else if (type === "warning") {
+        toaster.style.backgroundColor = "orange"; // warning message
+    }else {
         toaster.style.backgroundColor = "green"; // success message
     }
 

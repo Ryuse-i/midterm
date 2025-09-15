@@ -3,6 +3,7 @@
 
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
+        exit;
     }
 
     require_once 'db.php';
@@ -16,6 +17,30 @@
     }catch(PDOException $error){
         die("ERROR" . $error->getMessage());
     }
+
+    if(isset($_GET['action'])){
+        $toastMessage = null;
+        $toastType = null;
+        switch($_GET['action']){
+            case 'update_success':
+                $toastMessage = "Update successful!";
+                $toastType = "success";
+                break;
+            case 'update_failed':
+                $toastMessage = "Update failed. Please try again.";
+                $toastType = "error";
+                break;
+            case 'delete_success':
+                $toastMessage = "Delete successful!";
+                $toastType = "success";
+                break;
+            case 'no_record':
+                $toastMessage = "No record found to delete.";
+                $toastType = "warning";
+                break;
+        }
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +52,15 @@
     <title>Document</title>
 </head>
 <body>
+    <button onclick="window.location.href='addUserForm.php'">Add User</button>
+    
     <?php if($users): ?> <!-- if user array has values -->
         <table>
             <tr>
                 <th>ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
+                <th>CREATED_AT</th>
                 <th colspan="2">ACTIONS</th>
             </tr>
             <?php foreach($users as $user): ?> <!-- Iterate each user inside the array -->
@@ -40,6 +68,7 @@
                     <td><?php echo htmlspecialchars($user['id']); ?></td>
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
+                    <td><?php echo htmlspecialchars($user['created_at']); ?></td>
                     <td>
                         <button onclick="window.location.href='updateForm.php?user_id=<?php echo $user['id'] ?>'">Update</button> <!-- Redirect to update.php-->
                     </td>
@@ -53,5 +82,18 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
+
+    <div id="display-validation">
+        <p id="display-validation_message">hatdog</p>
+    </div> 
+    
+    <script src="function.js"></script>
+    <script>
+        <?php if (isset($toastMessage) && $toastMessage): ?>
+            document.addEventListener("DOMContentLoaded", () => {
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+            });
+        <?php endif; ?>
+    </script>
 </body>
 </html>
