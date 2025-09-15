@@ -79,6 +79,10 @@
         </table>
     <?php endif; ?>
 
+    <div id="display-validation">
+        <p id="display-validation_message">hatdog</p>
+    </div> 
+
     <script src="function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?>
