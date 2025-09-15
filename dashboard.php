@@ -3,6 +3,7 @@
 
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
+        exit;
     }
 
     require_once 'db.php';
@@ -15,6 +16,30 @@
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     }catch(PDOException $error){
         die("ERROR" . $error->getMessage());
+    }
+
+    if(isset($_GET['action'])){
+        $toastMessage = null;
+        $toastType = null;
+        switch($_GET['action']){
+            case 'update_success':
+                $toastMessage = "Update successful!";
+                $toastType = "success";
+                break;
+            case 'update_failed':
+                $toastMessage = "Update failed. Please try again.";
+                $toastType = "error";
+                break;
+            case 'delete_success':
+                $toastMessage = "Delete successful!";
+                $toastType = "success";
+                break;
+            case 'no_record':
+                $toastMessage = "No record found to delete.";
+                $toastType = "warning";
+                break;
+        }
+        
     }
 ?>
 
@@ -53,5 +78,14 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
+
+    <script src="function.js"></script>
+    <script>
+        <?php if (isset($toastMessage) && $toastMessage): ?>
+            document.addEventListener("DOMContentLoaded", () => {
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+            });
+        <?php endif; ?>
+    </script>
 </body>
 </html>

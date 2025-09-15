@@ -3,6 +3,7 @@
 
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
+        exit;
     }
 
     require_once 'db.php';
@@ -29,14 +30,17 @@
 
             $rows = $statement->rowCount();
         }catch(PDOException $error){
+            header('Location: dashboard.php?action=update_failed');
             die("ERROR: " . $error->getMessage());
         }
 
         if($rows > 0){
             header('Location: dashboard.php?action=update_success');
+            exit;
         }
         elseif($rows === 0){
             header('Location: dashboard.php?action=update_success');
+            exit;
         }
     }
 ?>

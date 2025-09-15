@@ -13,7 +13,7 @@
         }
         
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            header('Location: registerForm.php?user=invalid_email');
+            header('Location: loginForm.php?user=invalid_email');
             exit;
         }
 
@@ -25,7 +25,7 @@
             $statement->bindValue(":email", $email, PDO::PARAM_STR);
             $statement->execute();
 
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $user = $statement->fetch(PDO::FETCH_ASSOC); 
         } catch(PDOException $error){
             die("ERROR: " . $error->getMessage());
         }

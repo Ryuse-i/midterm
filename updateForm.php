@@ -3,6 +3,7 @@
 
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
+        exit;
     }
 
     require_once 'db.php';
