@@ -52,16 +52,20 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="window.location.href='addUserForm.php'">Add User</button>
+    <div>
+        <h2>USER MANAGEMENT</h2>
+        <p>Manage all users in one place.Control access,Assign roles,and monitor activity across your platform.</p>
+    </div>
+    <button id="add-user" onclick="window.location.href='addUserForm.php'">+ Add User</button>
     
     <?php if($users): ?> <!-- if user array has values -->
         <table>
-            <tr>
+            <tr id="row-border">
                 <th>ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
                 <th>CREATED_AT</th>
-                <th colspan="2">ACTIONS</th>
+                <th id="action-column" colspan="2">ACTIONS</th>
             </tr>
             <?php foreach($users as $user): ?> <!-- Iterate each user inside the array -->
                 <tr>
@@ -69,14 +73,15 @@
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['created_at']); ?></td>
-                    <td>
-                        <button onclick="window.location.href='updateForm.php?user_id=<?php echo $user['id'] ?>'">Update</button> <!-- Redirect to update.php-->
+                    <td id="action-column_update">
+                        <button id="update-user" onclick="window.location.href='updateForm.php?user_id=<?php echo $user['id'] ?>'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                        </button> <!-- Redirect to update.php-->
                     </td>
-                    <td>
-                        <button onclick="if(confirm('Are you sure you want to delete this?')) //js if confirm dialog
+                    <td id="action-column_delete">
+                        <button id="delete-user" onclick="if(confirm('Are you sure you want to delete this?')) //js if confirm dialog
                          {window.location.href='delete.php?user_id=<?php echo $user['id'] ?>';}"> <!-- Redirect to delete.php with user id using js-->
-                         Delete
-                        </button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                     </td>
                 </tr>
             <?php endforeach; ?>
