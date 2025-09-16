@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['csrf_token'])){
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
+}
+
 $toastMessage = null;
 $toastType = null;
 if (isset($_GET['user'])) {
@@ -35,6 +41,10 @@ if (isset($_GET['user'])) {
             $toastMessage = "User with this email already exists";
             $toastType = "error";
             break;
+        case 'csrf_error':
+            $toastMessage = "There was a problem with your request. Please try again.";
+            $toastType = "error";
+            break;
     }
 }
 ?>
@@ -55,6 +65,7 @@ if (isset($_GET['user'])) {
     
     <!-- Register-Form with client-side input validation -->
     <form action="register.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
         <label for="email">Email</label> <br>
@@ -69,15 +80,16 @@ if (isset($_GET['user'])) {
         <button type="submit" id="submit-form">Register</button> 
     </form>
 
+    <!-- Toast Notification -->
     <div id="display-validation">
-        <p id="display-validation_message">hatdog</p>
+        <p id="display-validation_message"></p>
     </div>
 
     <script src="function.js"></script>
     <script>
-        <?php if (isset($toastMessage) && $toastMessage): ?>
+        <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
             document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
     </script>

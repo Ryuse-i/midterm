@@ -1,6 +1,11 @@
 <?php
     session_start();
 
+    if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        header('Location: addUserForm.php?user=csrf_error');
+        exit;
+    }
+
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;

@@ -1,12 +1,16 @@
 <?php
     session_start();
+    require_once 'db.php';
+
+    if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        header('Location: updateForm.php?user=csrf_error');
+        exit;
+    }
 
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
     }
-
-    require_once 'db.php';
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id = $_POST['id'];

@@ -1,6 +1,10 @@
 <?php 
    session_start();
-   
+
+   if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
+    }
+
     if(!isset($_SESSION['user'])){
          header('Location: loginForm.php');
          exit;
@@ -50,6 +54,10 @@
                 $toastMessage = "Failed to add user. Please try again.";
                 $toastType = "error";   
                 break;  
+            case 'csrf_error':
+                $toastMessage = "There was a problem with your request. Please try again.";
+                $toastType = "error";
+                break;
         }
     }
 ?>
@@ -69,6 +77,7 @@
        <p>Enter user details below to add a new user</p>
     </div>
     <form action="addUser.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
         <label for="email">Email</label> <br>

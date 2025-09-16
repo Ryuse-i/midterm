@@ -1,6 +1,15 @@
 <?php
     session_start();
 
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
+    }
+
+    if(isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_GET['csrf_token'])) {
+        header('Location: dashboard.php?user=csrf_error');
+        exit;
+    }
+
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
@@ -34,6 +43,7 @@
 </head>
 <body>
     <form action="update.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <input type="text" name="id" value="<?php echo htmlspecialchars($user['id']); ?>" hidden>
         <label for="name">Name</label> <br>
         <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required><br><br>
