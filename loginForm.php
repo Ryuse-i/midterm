@@ -42,7 +42,7 @@ if (isset($_GET['user'])) {
         <p>Enter your details below to login your account</p>
     </div>
     <!-- Login-Form with client-side input validation -->
-    <form action="login.php" method="POST">
+    <form id="user-form" action="login.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>

@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_GET['csrf_token'])) {
+    if(isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         header('Location: dashboard.php?user=csrf_error');
         exit;
     }

@@ -76,7 +76,7 @@
         <h1>Add User</h1>
        <p>Enter user details below to add a new user</p>
     </div>
-    <form action="addUser.php" method="POST">
+    <form id="user-form" action="addUser.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>

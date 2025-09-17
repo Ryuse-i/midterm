@@ -27,14 +27,6 @@
         $toastMessage = null;
         $toastType = null;
         switch($_GET['action']){
-            case 'update_success':
-                $toastMessage = "Update successful!";
-                $toastType = "success";
-                break;
-            case 'update_failed':
-                $toastMessage = "Update failed. Please try again.";
-                $toastType = "error";
-                break;
             case 'delete_success':
                 $toastMessage = "Delete successful!";
                 $toastType = "success";
@@ -83,14 +75,22 @@
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['created_at']); ?></td>
                     <td id="action-column_update">
-                        <button id="update-user" onclick="window.location.href='updateForm.php?user_id=<?php echo $user['id'] ?>?csrf_token=<?php echo $_SESSION['csrf_token']; ?>';">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-                        </button> <!-- Redirect to update.php-->
+                        <form action="updateForm.php" method="POST">
+                            <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <button id="update-user" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                            </button>
+                        </form>
                     </td>
                     <td id="action-column_delete">
-                        <button id="delete-user" onclick="if(confirm('Are you sure you want to delete this?')) //js if confirm dialog
-                         {window.location.href='delete.php?user_id=<?php echo $user['id'] ?>?csrf_token=<?php echo $_SESSION['csrf_token']; ?>';}"> <!-- Redirect to delete.php with user id using js-->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        <form action="delete.php" method="POST">
+                            <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <button id="delete-user" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
+                        </form>    
                     </td>
                 </tr>
             <?php endforeach; ?>

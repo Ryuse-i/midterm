@@ -64,7 +64,7 @@ if (isset($_GET['user'])) {
     </div>
     
     <!-- Register-Form with client-side input validation -->
-    <form action="register.php" method="POST">
+    <form id="user-form" action="register.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>

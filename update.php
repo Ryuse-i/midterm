@@ -34,16 +34,16 @@
 
             $rows = $statement->rowCount();
         }catch(PDOException $error){
-            header('Location: dashboard.php?action=update_failed');
+            header('Location: updateForm.php?action=update_failed');
             die("ERROR: " . $error->getMessage());
         }
 
         if($rows > 0){
-            header('Location: dashboard.php?action=update_success');
+            header('Location: updateForm.php?action=update_success');
             exit;
         }
         elseif($rows === 0){
-            header('Location: dashboard.php?action=update_success');
+            header('Location: updateForm.php?action=update_success');
             exit;
         }
     }
