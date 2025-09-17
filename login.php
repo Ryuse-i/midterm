@@ -2,6 +2,11 @@
     session_start();
     require_once "db.php";
 
+    if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        header('Location: loginForm.php?user=csrf_error');
+        exit;
+    }
+
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
@@ -27,6 +32,7 @@
 
             $user = $statement->fetch(PDO::FETCH_ASSOC); 
         } catch(PDOException $error){
+
             die("ERROR: " . $error->getMessage());
         }
 

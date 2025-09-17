@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['csrf_token'])){
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
+}
+
 $toastMessage = null;
 $toastType = null;
 if (isset($_GET['user'])) {
@@ -13,6 +19,10 @@ if (isset($_GET['user'])) {
             break;
         case 'incorrect_credentials':
             $toastMessage = "Incorrect username, email, or password";
+            $toastType = "error";
+            break;
+        case 'csrf_error':
+            $toastMessage = "There was a problem with your request. Please try again.";
             $toastType = "error";
             break;
     }
@@ -32,7 +42,8 @@ if (isset($_GET['user'])) {
         <p>Enter your details below to login your account</p>
     </div>
     <!-- Login-Form with client-side input validation -->
-    <form action="login.php" method="POST">
+    <form id="user-form" action="login.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
         <label for="email">Email</label> <br>
