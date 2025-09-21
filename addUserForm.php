@@ -1,18 +1,21 @@
 <?php 
    session_start();
 
+   // CSRF token validation
    if(!isset($_SESSION['csrf_token'])){
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
     }
 
+    // Check if user is logged in
     if(!isset($_SESSION['user'])){
          header('Location: loginForm.php');
          exit;
     }
 
+    // Check for messages in the URL parameters
     $toastMessage = null;
     $toastType = null;
-    if (isset($_GET['user'])) {
+    if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
         switch ($_GET['user']) {
             case 'empty_fields':
                 $toastMessage = "Please fill out all fields";
@@ -71,11 +74,15 @@
     <title>Add User</title>
 </head>
 <body>
-    
+    <div>
+        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+    </div>
     <div id="Form-head">
         <h1>Add User</h1>
        <p>Enter user details below to add a new user</p>
     </div>
+    <!-- User form to add new user -->
+    <!-- With client side validation -->
     <form id="user-form" action="addUser.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
@@ -93,15 +100,17 @@
         <button type="submit" id="submit-form">Add User</button> 
     </form>
 
+    <!-- Toast message -->
     <div id="display-validation">
         <p id="display-validation_message">hatdog</p>
     </div>
     
     <script src="function.js"></script>
     <script>
-        <?php if (isset($toastMessage) && $toastMessage): ?>
-            document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+        // Display toast message if set
+        <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
     </script>

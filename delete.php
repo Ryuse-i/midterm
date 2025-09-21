@@ -1,21 +1,25 @@
 <?php
     session_start();
+    require_once 'db.php';
 
-    if(isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        header('Location: dashboard.php?user=csrf_error');
-        exit;
-    }
 
+    //check if user is logged in
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
     }
 
-    require_once 'db.php';
 
-    if(isset($_GET['user_id'])){
-        $id = $_GET['user_id'];
+    // Process the form submission
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        // CSRF token validation
+        if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            header('Location: dashboard.php?user=csrf_error');
+            exit;
+        }
+        $id = $_POST['user_id'];
 
+        // Delete user from the database
         try{
             $sql = 'DELETE FROM users WHERE id = :id';
             $statement = $pdo->prepare($sql);
@@ -28,13 +32,20 @@
             die("ERROR: " . $error->getMessage());
         }
 
-        if($rows > 0){
+        // Redirect based on the result of the delete operation
+        if($rows > 0){ // If rows were affected (deleted)
             header('Location: dashboard.php?action=delete_success');
             exit;
         }
-        elseif($rows === 0){
+        elseif($rows === 0){ // If no rows were affected (no record found)
             header('Location: dashboard.php?action=no_record');
             exit;
+        }else{ // Other errors
+            header('Location: dashboard.php?action=update_failed');
+            exit;
         }
+    }else{
+        header('Location: dashboard.php?action=no_record');
+        exit;
     }
 ?>

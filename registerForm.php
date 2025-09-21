@@ -1,13 +1,15 @@
 <?php
 session_start();
 
+//Generate CSRF token if not already set 
 if(!isset($_SESSION['csrf_token'])){
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 $toastMessage = null;
 $toastType = null;
-if (isset($_GET['user'])) {
+// Check for messages in the URL parameters
+if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
     switch ($_GET['user']) {
         case 'empty_fields':
             $toastMessage = "Please fill out all fields";
@@ -80,6 +82,10 @@ if (isset($_GET['user'])) {
         <button type="submit" id="submit-form">Register</button> 
     </form>
 
+    <div id="form-links">
+        <p style="display: inline">Already have an account?</p> <a id="login-link" href="loginForm.php">Login here</a>
+    </div>
+
     <!-- Toast Notification -->
     <div id="display-validation">
         <p id="display-validation_message"></p>
@@ -88,8 +94,8 @@ if (isset($_GET['user'])) {
     <script src="function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
-            document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                toasterDisplay("<?php echo $toastMessage ?>", "<?php  echo $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
     </script>

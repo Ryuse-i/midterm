@@ -1,18 +1,19 @@
 <?php 
     session_start();
-
+    require_once 'db.php';
+    // CSRF token validation
     if(!isset($_SESSION['csrf_token'])){
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
     }
 
-
+    // Check if user is logged in
     if(!isset($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
     }
 
-    require_once 'db.php';
 
+    // Fetch all users from the database
     try{
         $sql = 'SELECT * FROM users';
         $statement = $pdo->prepare($sql);
@@ -23,12 +24,25 @@
         die("ERROR" . $error->getMessage());
     }
 
-    if(isset($_GET['action'])){
-        $toastMessage = null;
-        $toastType = null;
+    // Check for messages in the URL parameters
+    $toastMessage = null;
+    $toastType = null;
+    if(isset($_GET['action'])){ // Check if there's an 'action' parameter in the URL
         switch($_GET['action']){
+            case 'update_success':
+                $toastMessage = "Updated successfully!";
+                $toastType = "success";
+                break;
+            case 'no_changes':
+                $toastMessage = "No changes were made.";
+                $toastType = "warning";
+                break;
+            case 'update_failed':
+                $toastMessage = "Failed to update. Please try again.";
+                $toastType = "error";
+                break;
             case 'delete_success':
-                $toastMessage = "Delete successful!";
+                $toastMessage = "Deleted successfully!";
                 $toastType = "success";
                 break;
             case 'no_record':
@@ -55,8 +69,9 @@
 <body>
     <div>
         <h2>USER MANAGEMENT</h2>
-        <p>Manage all users in one place.Control access,Assign roles,and monitor activity across your platform.</p>
+        <p>Manage all users in one place.Control access and monitor activity across your platform.</p>
     </div>
+
     <button id="add-user" onclick="window.location.href='addUserForm.php'">+ Add User</button>
     
     <?php if($users): ?> <!-- if user array has values -->
@@ -70,11 +85,13 @@
             </tr>
             <?php foreach($users as $user): ?> <!-- Iterate each user inside the array -->
                 <tr>
-                    <td><?php echo htmlspecialchars($user['id']); ?></td>
+                    <!-- htmlspecialchars for html injection -->
+                    <td><?php echo htmlspecialchars($user['id']); ?></td> 
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['created_at']); ?></td>
                     <td id="action-column_update">
+                        <!-- POST form with hidden inputs -->
                         <form action="updateForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
@@ -84,7 +101,8 @@
                         </form>
                     </td>
                     <td id="action-column_delete">
-                        <form action="delete.php" method="POST">
+                        <!-- POST form with hidden inputs -->
+                        <form action="deleteForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button id="delete-user" type="submit">
@@ -97,15 +115,16 @@
         </table>
     <?php endif; ?>
 
+    <!-- Toast message -->
     <div id="display-validation">
         <p id="display-validation_message">hatdog</p>
     </div> 
     
     <script src="function.js"></script>
     <script>
-        <?php if (isset($toastMessage) && $toastMessage): ?>
-            document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+        <?php if (isset($toastMessage) && $toastMessage): ?> // If there's a message to display
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
     </script>

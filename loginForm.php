@@ -7,7 +7,8 @@ if(!isset($_SESSION['csrf_token'])){
 
 $toastMessage = null;
 $toastType = null;
-if (isset($_GET['user'])) {
+// Check for messages in the URL parameters
+if (isset($_GET['user'])){  // Check if there's a 'user' parameter in the URL
     switch ($_GET['user']) {
         case 'empty_fields':
             $toastMessage = "Please fill out all fields";
@@ -58,15 +59,20 @@ if (isset($_GET['user'])) {
         <button type="submit" id="submit-form">Log In</button> 
     </form>
 
+
+    <div id="form-links">
+        <p style="display: inline">Already have an account?</p> <a id="register-link" href="loginForm.php">Login here</a>
+    </div>
     <div id="display-validation">
         <p id="display-validation_message">hatdog</p>
     </div>
 
     <script src="function.js"></script>
     <script>
+        // Display toast notification if there's a message
         <?php if (isset($toastMessage) && $toastMessage): ?>
-            document.addEventListener("DOMContentLoaded", () => {
-                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>");
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
     </script>

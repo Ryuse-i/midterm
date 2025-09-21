@@ -6,6 +6,7 @@ function toasterDisplay(message, type) {
 
     toaster.classList.remove("display-validation_message");
 
+    //waits 100ms before showing the toaster
     setTimeout(() => {
         toaster.classList.add("display-validation_message");
         toaster.classList.add("display-validation_message_push");
