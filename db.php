@@ -5,11 +5,32 @@
     $username = "root";
     $password = "";
 
+    set_error_handler("logErrorMessage");
+    set_exception_handler("logException");
+
     // Create a new PDO instance
     try{
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set error mode to exception
     } catch(PDOException $error){ // Handle connection error
-        die("ERROR: " . $error->getMessage());
+        throw $error;
     }
-?>
+
+
+    function logErrorMessage($errorType, $errorMessage, $errorFile, $errorLine) {
+        //error log with timestamp
+       $logMessage = "[" . date("Y-m-d H:i:s") . "]";
+       $logMessage .= "Type: $errorType | Message: $errorMessage | ";
+       $logMessage .= "File: $errorFile | Line: $errorLine" . PHP_EOL;
+       
+       error_log($logMessage, 3, __DIR__ . '/app_log.txt'); // Log to a file named error_log.txt in the current directory
+    }
+
+    function logException($exception){
+        $logExceptionMessage = "[" . date("Y-m-d H:i:s") . "] ";
+        $logExceptionMessage .= "Exception: " . $exception->getMessage();
+        $logExceptionMessage .= " in " . $exception->getFile();
+        $logExceptionMessage .= " on line " . $exception->getLine() . PHP_EOL;
+
+        error_log($logExceptionMessage, 3, __DIR__ . '/app_log.txt'); // Log to a file named error_log.txt in the current directory
+    }

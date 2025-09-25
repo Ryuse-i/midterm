@@ -183,7 +183,7 @@ p {
    text-align: center;
 }
 
-#back-dashboard {
+#back-dashboard, #view-gallery {
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
@@ -196,7 +196,9 @@ p {
     left: 10px;
 }
 
-#back-dashboard:hover {
+
+
+#back-dashboard:hover, #view-gallery:hover {
     transform: scale(1.05);
     background-color: rgb(217, 204, 204);
 }
@@ -215,4 +217,32 @@ p {
 
 #register-link:hover, #login-link:hover {
     text-decoration: underline;
+}
+
+input[type="file"] {
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="file"]::file-selector-button{
+    width: 120px;
+    height: 40px;
+    background-color: orangered;
+    color: white;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+}
+
+input[type="file"]::file-selector-button:hover{
+    background-color: rgb(208, 63, 10);
+    cursor: pointer;
+}
+
+#gallery{
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    column-gap: 10px;
+    row-gap: 15px;
 }

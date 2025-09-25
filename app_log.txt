@@ -1,0 +1,2 @@
+[2025-09-25 11:05:22] Exception: SQLSTATE[HY000] [1045] Access denied for user 'roo'@'localhost' (using password: NO) in C:\xampp\htdocs\ITELEC4\db.php on line 12
+[2025-09-25 11:06:47] Exception: SQLSTATE[HY000] [1049] Unknown database 'system_d' in C:\xampp\htdocs\ITELEC4\db.php on line 13

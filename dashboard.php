@@ -115,6 +115,9 @@
         </table>
     <?php endif; ?>
 
+
+    <button id="view-gallery" onclick="window.location.href='gallery.php'">Gallery</button>
+
     <!-- Toast message -->
     <div id="display-validation">
         <p id="display-validation_message">hatdog</p>
