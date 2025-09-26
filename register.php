@@ -89,9 +89,10 @@
                 session_regenerate_id(true);
 
                 $_SESSION['user'] = [
-                    'id' => $cleanName,
-                    'name' => $validEmail,
-                    'email' => $hashedPassword
+                    'id' => $pdo->lastInsertId(),
+                    'name' => $cleanName,
+                    'email' => $validEmail,
+                    'register' => true
                 ];
 
                 header('Location: dashboard.php');

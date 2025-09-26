@@ -61,7 +61,7 @@ if (isset($_GET['user'])){  // Check if there's a 'user' parameter in the URL
 
 
     <div id="form-links">
-        <p style="display: inline">Already have an account?</p> <a id="register-link" href="loginForm.php">Login here</a>
+        <p style="display: inline">Already have an account?</p> <a id="register-link" href="registerForm.php">Register here</a>
     </div>
     <div id="display-validation">
         <p id="display-validation_message">hatdog</p>

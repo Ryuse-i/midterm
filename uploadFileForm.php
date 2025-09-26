@@ -55,7 +55,7 @@
 </head>
 <body>
     <div>
-        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+        <button id="back-dashboard" onclick="window.location.href='gallery.php'">Back to Gallery</button>
     </div>
     <div id="Form-head">
         <h1>Upload an Image</h1>

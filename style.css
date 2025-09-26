@@ -4,11 +4,29 @@ body{
  margin: 0px;
 }
 
+#overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* dark background */
+    backdrop-filter: blur(6px);  /* blur the background */
+    opacity: 0;
+    pointer-events: none; /* prevent blocking clicks when hidden */
+    transition: opacity 0.4s ease;
+    z-index: 999; /* behind popup, above content */
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #Form-head{
-    color: white;
     text-align: center;
     margin-top: 100px;
     font-family: inherit;
+    color: white;
 }
 
 #user-form{
@@ -240,9 +258,94 @@ input[type="file"]::file-selector-button:hover{
     cursor: pointer;
 }
 
-#gallery{
-    grid-template-columns: 100px 50px 100px;
-    grid-template-rows: 80px auto 80px; 
-    column-gap: 10px;
-    row-gap: 15px;
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+     grid-auto-rows: 200px; 
+    gap: 15px; 
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.gallery-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* removes default inline gap */
+    
+}
+
+#upload-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+#upload-image{
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#upload-image:hover{
+    background-color: rgb(217, 204, 204);
+    cursor: pointer;
+}
+
+#display-welcome{
+    position: fixed;          
+    top: 60%;                 
+    left: 50%;                
+    transform: translate(-50%, -50%)scale(0.8);
+    z-index: 9999;
+    width: 50%;
+    height:30%; 
+    background-color: rgb(217, 252, 251);
+    border: 1px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#display-welcome_message{
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#close-welcome{
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background-color: rgb(245, 147, 129);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    border-radius: 7px;
+}
+
+#close-welcome:hover{
+    background-color: rgb(255, 94, 66);
+    transform: scale(1.1);
+}
+
+#display-welcome.welcome-message_push {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }

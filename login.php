@@ -42,7 +42,8 @@
             $_SESSION['user'] = [
                 'id' => $user['id'],
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'login' => true
             ];
 
             header('Location: dashboard.php');
