@@ -108,7 +108,7 @@ table{
     border: 1px solid white;
 }
 
-#action-column_update , #action-column_delete{
+.action-column_update , .action-column_delete{
     text-align: center;
 }
 
@@ -162,7 +162,7 @@ th{
 }
         
 
-#update-user , #delete-user{
+.update-user , .delete-user{
     border-radius: 20px;
     height: 30px;
     width: 70px;
@@ -172,16 +172,16 @@ th{
     
 }
 
-#update-user:hover{
+.update-user:hover{
     transform: scale(1.06);
     background-color:  rgb(51, 65, 170);
 }
 
-#delete-user{
+.delete-user{
     background-color: rgb(242, 77, 77);
 }
 
-#delete-user:hover{
+.delete-user:hover{
     transform: scale(1.06);
     background-color: rgb(170, 51, 51);
 }
@@ -254,7 +254,7 @@ input[type="file"]::file-selector-button{
 }
 
 input[type="file"]::file-selector-button:hover{
-    background-color: rgb(208, 63, 10);
+    background-color: rgb(176, 54, 9);
     cursor: pointer;
 }
 
@@ -283,11 +283,17 @@ input[type="file"]::file-selector-button:hover{
     
 }
 
+.gallery-item:hover{
+    border: 3px solid #ccc;
+}
+
 #upload-container{
     display: flex;
     justify-content: flex-end;
     margin-right: 10%;
 }
+
+
 
 #upload-image{
     padding: 10px;
@@ -295,10 +301,12 @@ input[type="file"]::file-selector-button:hover{
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+    transition: transform ease 0.2s;
 }
 
 #upload-image:hover{
     background-color: rgb(217, 204, 204);
+    transform: scale(1.1);
     cursor: pointer;
 }
 
@@ -328,7 +336,7 @@ input[type="file"]::file-selector-button:hover{
     font-family: sans-serif;
 }
 
-#close-welcome{
+#close-welcome-button{
     position: absolute;
     top: 12px;
     right: 15px;
@@ -340,7 +348,7 @@ input[type="file"]::file-selector-button:hover{
     border-radius: 7px;
 }
 
-#close-welcome:hover{
+#close-welcome-button:hover{
     background-color: rgb(255, 94, 66);
     transform: scale(1.1);
 }

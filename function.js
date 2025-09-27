@@ -22,7 +22,17 @@ function toasterDisplay(message, type) {
     // hide after 3 seconds
     setTimeout(() => {
         toaster.classList.remove("display-validation_message_push");
-    }, 3000);
+    }, 3000); 
+}
+
+
+
+function closeWelcomeMessage() {
+    let welcomeMessage = document.getElementById('display-welcome');
+    let pageContent = document.getElementById('overlay');
+
+    pageContent.classList.remove("active");
+    welcomeMessage.classList.remove("welcome-message_push");
 }
 
 function openWelcomeMessage($message) {
@@ -31,20 +41,17 @@ function openWelcomeMessage($message) {
     let pageContent = document.getElementById('overlay');
 
     pageContent.classList.add("active");
-
     welcomeMessageText.innerHTML = $message;
 
     setTimeout(() => {
         welcomeMessage.classList.add("welcome-message_push");
     }, 100);
+
+    // fallback release in case close never fires
+    setTimeout(() => {
+        pageContent.classList.remove("active");
+        welcomeMessage.classList.remove("welcome-message_push")
+    }, 10000);
 }
 
-function closeWelcomeMessage() {
-    let welcomeMessage = document.getElementById('display-welcome');
-    let pageContent = document.getElementById('overlay');
-
-    pageContent.classList.remove("active");
-    welcomeMessage.classList.remove("welcome-message_push");
-
-}
     
