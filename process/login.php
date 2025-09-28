@@ -1,24 +1,25 @@
 <?php 
     session_start();
-    require_once "db.php";
+    require_once "../db.php";
 
-    if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        header('Location: loginForm.php?user=csrf_error');
-        exit;
-    }
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
+        if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            header('Location: ../pages/loginForm.php?user=csrf_error');
+            exit;
+        }
+    
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
         if(empty($name) || empty($email) || empty($password)){
-            header('Location: loginForm.php?user=empty_fields');
+            header('Location: ../pages/loginForm.php?user=empty_fields');
             exit;
         }
         
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            header('Location: loginForm.php?user=invalid_email');
+            header('Location: ../pages/loginForm.php?user=invalid_email');
             exit;
         }
 
@@ -46,11 +47,11 @@
                 'register' => false
             ];
 
-            header('Location: dashboard.php?action');
+            header('Location: ../pages/dashboard.php');
             exit;
         }
         else{
-            header('Location: loginForm.php?user=incorrect_credentials');
+            header('Location: ../pages/loginForm.php?user=incorrect_credentials');
             exit;
         }
     }

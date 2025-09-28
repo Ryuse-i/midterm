@@ -1,5 +1,5 @@
 <?php
-    $dir = "uploads/"; // folder where files are saved
+    $dir = "../uploads/"; // folder where files are saved
     $files = array_diff(scandir($dir), array('.', '..'));
     
 ?>
@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>Document</title>
 </head>
 <body>

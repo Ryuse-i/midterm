@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once 'db.php';
+    require_once '../db.php';
 
     // CSRF token validation
     if(!isset($_SESSION['csrf_token'])){
@@ -13,7 +13,6 @@
         header('Location: loginForm.php');
         exit;
     }
-
     // Welcome message logic
     $welcomeMessage = null;
     if($_SESSION['user']['login'] === true){ // Check if user just logged in
@@ -37,7 +36,6 @@
     }catch(PDOException $error){
         throw $error;
     }
-
     // Check for messages in the URL parameters
     $toastMessage = null;
     $toastType = null;
@@ -81,7 +79,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -138,7 +136,7 @@
     onclick="
         if(confirm('Are you sure you want to logout?')){
             logout();
-            window.location.href='logout.php';
+            window.location.href='../process/logout.php';
         }
     ">Logout </button>
 
@@ -153,7 +151,7 @@
         <p id="display-welcome_message"></p>
     </div>
     
-    <script src="function.js"></script>
+    <script src="../resources/js/function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?> // If there's a message to display
             document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load

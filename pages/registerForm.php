@@ -56,7 +56,7 @@ if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>REGISTER FORM</title>
 </head>
 <body>
@@ -66,7 +66,7 @@ if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
     </div>
     
     <!-- Register-Form with client-side input validation -->
-    <form id="user-form" action="register.php" method="POST">
+    <form id="user-form" action="../process/register.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
@@ -91,7 +91,7 @@ if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
         <p id="display-validation_message"></p>
     </div>
 
-    <script src="function.js"></script>
+    <script src="../resources/js/function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
             document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load

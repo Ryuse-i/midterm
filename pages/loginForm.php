@@ -34,7 +34,7 @@ if (isset($_GET['user'])){  // Check if there's a 'user' parameter in the URL
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>LOGIN FORM</title>
 </head>
 <body>
@@ -43,7 +43,7 @@ if (isset($_GET['user'])){  // Check if there's a 'user' parameter in the URL
         <p>Enter your details below to login your account</p>
     </div>
     <!-- Login-Form with client-side input validation -->
-    <form id="user-form" action="login.php" method="POST">
+    <form id="user-form" action="../process/login.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
@@ -67,7 +67,7 @@ if (isset($_GET['user'])){  // Check if there's a 'user' parameter in the URL
         <p id="display-validation_message">hatdog</p>
     </div>
 
-    <script src="function.js"></script>
+    <script src="../resources/js/function.js"></script>
     <script>
         // Display toast notification if there's a message
         <?php if (isset($toastMessage) && $toastMessage): ?>

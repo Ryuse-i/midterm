@@ -55,7 +55,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>Upload Image</title>
 </head>
 <body>
@@ -68,7 +68,7 @@
     </div>
 
     <div class="form-container">
-        <form id="user-form" action="uploadFile.php" method="post" enctype="multipart/form-data">
+        <form id="user-form" action="../process/uploadFile.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <label for="uploadedFile"> 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -85,7 +85,7 @@
         <p id="display-validation_message"></p>
     </div>
 
-    <script src="function.js"></script>
+    <script src="../resources/js/function.js"></script>
     <script>
         // Display toast message if exists
         <?php if (isset($toastMessage) && $toastMessage): ?> //check if toast message is set

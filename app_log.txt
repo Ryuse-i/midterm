@@ -795,3 +795,19 @@
 [2025-09-28 04:39:56]Type: 2 | Message: Undefined array key "register" | File: C:\xampp\htdocs\ITELEC4\dashboard.php | Line: 30
 [2025-09-28 04:46:55]Type: 2 | Message: Undefined array key "register" | File: C:\xampp\htdocs\ITELEC4\dashboard.php | Line: 30
 [2025-09-28 04:52:15]Type: 2 | Message: Undefined array key "register" | File: C:\xampp\htdocs\ITELEC4\dashboard.php | Line: 30
+[2025-09-28 14:50:44] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 14:51:40] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 14:52:36] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 14:53:09] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 14:54:07] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 16:13:52] Exception: SQLSTATE[HY000] [1049] Unknown database 'system_d' in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 16:25:25] Exception: SQLSTATE[HY000] [1049] Unknown database 'system_d' in C:\xampp\htdocs\midterm\db.php on line 13
+[2025-09-28 16:30:53] Exception: SQLSTATE[HY000] [1049] Unknown database 'system_d' in C:\xampp\htdocs\midterm\db.php on line 15
+[2025-09-28 16:30:54] Exception: SQLSTATE[HY000] [1049] Unknown database 'system_d' in C:\xampp\htdocs\midterm\db.php on line 15
+[2025-09-28 16:32:01] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:32:01] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:37:55] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:38:04] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:38:13] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:38:25] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
+[2025-09-28 16:41:49]Type: 2 | Message: Undefined array key "hatdog" | File: C:\xampp\htdocs\midterm\pages\dashboard.php | Line: 24

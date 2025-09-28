@@ -5,6 +5,9 @@
     $username = "root";
     $password = "";
 
+    define('APP_ROOT', __DIR__ . '/app_log.txt');
+
+    echo APP_LOG;
     set_error_handler("logErrorMessage");
     set_exception_handler("logException");
 
@@ -16,7 +19,7 @@
         throw $error;
     }
 
-
+    
 
     function logErrorMessage($errorType, $errorMessage, $errorFile, $errorLine) {
         //error log with timestamp
@@ -24,7 +27,7 @@
        $logMessage .= "Type: $errorType | Message: $errorMessage | ";
        $logMessage .= "File: $errorFile | Line: $errorLine" . PHP_EOL;
        
-       error_log($logMessage, 3, __DIR__ . '/app_log.txt'); // Log to a file named error_log.txt in the current directory
+       error_log($logMessage, 3, APP_LOG); // Log to a file named error_log.txt in the current directory
     }
 
     function logException($exception){
@@ -33,5 +36,6 @@
         $logExceptionMessage .= " in " . $exception->getFile();
         $logExceptionMessage .= " on line " . $exception->getLine() . PHP_EOL;
 
-        error_log($logExceptionMessage, 3, __DIR__ . '/app_log.txt'); // Log to a file named error_log.txt in the current directory
+        error_log($logExceptionMessage, 3, APP_LOG); // Log to a file named error_log.txt in the current directory
     }
+    

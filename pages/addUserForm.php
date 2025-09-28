@@ -66,7 +66,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <title>Add User</title>
 </head>
 <body>
@@ -79,7 +79,7 @@
     </div>
     <!-- User form to add new user -->
     <!-- With client side validation -->
-    <form id="user-form" action="addUser.php" method="POST">
+    <form id="user-form" action="../process/addUser.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <label for="name">Name</label> <br>
         <input type="text" name="name" placeholder="Full Name" required><br><br>
@@ -101,7 +101,7 @@
         <p id="display-validation_message">hatdog</p>
     </div>
     
-    <script src="function.js"></script>
+    <script src="../resources/js/function.js"></script>
     <script>
         // Display toast message if set
         <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
