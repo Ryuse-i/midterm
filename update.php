@@ -42,8 +42,10 @@
             $rows = $statement->rowCount();
         }catch(PDOException $error){
             header('Location: dashboard.php?action=update_failed');
-            die("ERROR: " . $error->getMessage());
+            throw $error;
         }
+
+        throw $error;
 
         // Redirect based on the result of the update operation
         if($rows > 0){ // If rows were affected (updated)

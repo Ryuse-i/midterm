@@ -357,3 +357,22 @@ input[type="file"]::file-selector-button:hover{
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
+
+#logout-button{
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+
+#logout-button:hover{
+    transform: scale(1.05);
+    background-color: rgb(217, 204, 204);
+}

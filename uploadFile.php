@@ -8,6 +8,12 @@
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        if(empty($_FILES['uploadedFile']['name'])){
+            header("Location: uploadFileForm.php?file=empty");
+            exit;
+        }
+
         $uploadDir = 'uploads/';
         $uploadFile = $uploadDir . $_SESSION['user']['id'] . '_' . basename($_FILES['uploadedFile']['name']);
         $fileExtension = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
@@ -15,19 +21,19 @@
         
         //check if the file already exists 
         if (file_exists($uploadFile)) {
-            header("Location: uploadFileForm.php?error=file_exists");
+            header("Location: uploadFileForm.php?file=file_exists");
             exit;
         } 
 
         // Allow certain file formats   
         if($fileExtension != "jpg" && $fileExtension != "png" && $fileExtension != "jpeg"){
-            header("Location: uploadFileForm.php?error=invalid_file_type");
+            header("Location: uploadFileForm.php?file=invalid_file_type");
             exit;
         }
         
         // Check file size
         if ($_FILES['uploadedFile']['size'] > $maxFileSize) {   
-            header("Location: uploadFileForm.php?error=file_too_large");
+            header("Location: uploadFileForm.php?file=file_too_large");
             exit;
         }   
         
@@ -36,14 +42,14 @@
         $check = getimagesize($_FILES['uploadedFile']['tmp_name']);
         if($check !== false) {
             if (move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $uploadFile)) {
-                header("Location: uploadFileForm.php?file_upload=success");
+                header("Location: uploadFileForm.php?file=success");
                 exit;
             } else {
-                header("Location: uploadFileForm.php?file_upload=failed");
+                header("Location: uploadFileForm.php?file=failed");
                 exit;
             }
         } else {
-            header("Location: uploadFileForm.php?error=not_image");
+            header("Location: uploadFileForm.php?file=not_image");
             exit;
         }
     }   

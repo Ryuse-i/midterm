@@ -32,8 +32,7 @@
 
             $user = $statement->fetch(PDO::FETCH_ASSOC); 
         } catch(PDOException $error){
-
-            die("ERROR: " . $error->getMessage());
+            throw $error;
         }
 
         if($user && password_verify($password, $user['password'])){
@@ -43,10 +42,11 @@
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'login' => true
+                'login' => true,
+                'register' => false
             ];
 
-            header('Location: dashboard.php');
+            header('Location: dashboard.php?action');
             exit;
         }
         else{

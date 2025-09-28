@@ -49,10 +49,6 @@
                 $toastMessage = "User with this email already exists";
                 $toastType = "error";   
                 break;
-            case 'add_success':
-                $toastMessage = "User added successfully";
-                $toastType = "success";   
-                break;  
             case 'add_failed':
                 $toastMessage = "Failed to add user. Please try again.";
                 $toastType = "error";   

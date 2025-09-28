@@ -1,13 +1,20 @@
 <?php 
     session_start();
     require_once 'db.php';
+
     // CSRF token validation
     if(!isset($_SESSION['csrf_token'])){
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
     }
 
+    //forces the browser not to store a cache of this page
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: 0"); 
+
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user']) && empty($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
     }
@@ -33,7 +40,7 @@
 
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     }catch(PDOException $error){
-        die("ERROR" . $error->getMessage());
+        throw $error;
     }
 
     // Check for messages in the URL parameters
@@ -43,6 +50,10 @@
         switch($_GET['action']){
             case 'update_success':
                 $toastMessage = "Updated successfully!";
+                $toastType = "success";
+                break;
+            case 'add_success':
+                $toastMessage = "Added successfully!";
                 $toastType = "success";
                 break;
             case 'no_changes':
@@ -126,7 +137,15 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
+
     <button id="view-gallery" onclick="window.location.href='gallery.php'">Gallery</button>
+    <button id="logout-button" 
+    onclick="
+        if(confirm('Are you sure you want to logout?')){
+            logout();
+            window.location.href='logout.php';
+        }
+    ">Logout </button>
 
     <!-- Toast message -->
     <div id="display-validation">
@@ -163,6 +182,10 @@
             if(sessionStorage.getItem("isWelcomeClosed") === "true"){
                 document.getElementById("display-welcome").style.pointerEvents = "none";
             }
+        }
+
+        function logout(){
+            sessionStorage.clear();
         }
 
     </script>

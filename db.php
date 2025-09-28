@@ -17,6 +17,7 @@
     }
 
 
+
     function logErrorMessage($errorType, $errorMessage, $errorFile, $errorLine) {
         //error log with timestamp
        $logMessage = "[" . date("Y-m-d H:i:s") . "]";

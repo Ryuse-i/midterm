@@ -77,7 +77,7 @@
 
             $user = $statement->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $error){
-            die("ERROR: " . $error->getMessage());
+            throw $error;
         }
 
         // If user does not exist, proceed to add
@@ -91,11 +91,9 @@
                 $statement->execute();
                 $row =$statement->rowCount();
 
-                header('Location: dashboard.php');
-                exit;
             }catch(PDOException $error){
                 header('Location: addUserForm.php?user=add_failed');
-                die("ERROR: " . $error->getMessage());
+                throw $error;
             }
         }
         else{
@@ -105,7 +103,7 @@
 
         // Redirect based on the result of the insert operation
         if($row > 0){ // If rows were affected (inserted)
-            header('Location: dashboard.php?user=add_success');
+            header('Location: dashboard.php?action=add_success');
             exit;
         } else {
             header('Location: addUserForm.php?user=add_failed');

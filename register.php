@@ -72,7 +72,7 @@
 
             $user = $statement->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $error){
-            die("ERROR: " . $error->getMessage());
+            throw $error;
         }
 
         // If user does not exist, insert new user
@@ -92,13 +92,14 @@
                     'id' => $pdo->lastInsertId(),
                     'name' => $cleanName,
                     'email' => $validEmail,
-                    'register' => true
+                    'register' => true,
+                    'login' => false
                 ];
 
                 header('Location: dashboard.php');
                 exit;
             }catch(PDOException $error){
-                die("ERROR: " . $error->getMessage());
+                throw $error;
             }
         }
         else{

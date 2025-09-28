@@ -32,7 +32,8 @@
             $user = $statement->fetch(PDO::FETCH_ASSOC);
         }catch(PDOException $error){
             header('Location: dashboard.php?action=update_failed');
-            die("ERROR: " . $error->getMessage());
+            throw $error;
+            throw $error;
         }
     }
     else{
