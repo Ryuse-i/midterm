@@ -1,17 +1,31 @@
 <?php 
     session_start();
     require_once 'db.php';
+
     // CSRF token validation
     if(!isset($_SESSION['csrf_token'])){
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
     }
 
+
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user']) && empty($_SESSION['user'])){
         header('Location: loginForm.php');
         exit;
     }
 
+    // Welcome message logic
+    $welcomeMessage = null;
+    if($_SESSION['user']['login'] === true){ // Check if user just logged in
+        $welcomeMessage = "Welcome back, " . htmlspecialchars($_SESSION['user']['name']) . "!";
+        $_SESSION['user']['login'] = false; // Reset login flag after showing the message
+    } 
+    
+    // Show registration success message only once
+    if($_SESSION['user']['register'] === true){
+        $welcomeMessage = "Registration successful! <br> Welcome, " . htmlspecialchars($_SESSION['user']['name']) . "!";
+        $_SESSION['user']['register'] = false; // Reset register flag after showing the message
+    }
 
     // Fetch all users from the database
     try{
@@ -21,7 +35,7 @@
 
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     }catch(PDOException $error){
-        die("ERROR" . $error->getMessage());
+        throw $error;
     }
 
     // Check for messages in the URL parameters
@@ -31,6 +45,10 @@
         switch($_GET['action']){
             case 'update_success':
                 $toastMessage = "Updated successfully!";
+                $toastType = "success";
+                break;
+            case 'add_success':
+                $toastMessage = "Added successfully!";
                 $toastType = "success";
                 break;
             case 'no_changes':
@@ -67,11 +85,11 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="overlay"></div>
     <div>
         <h2>USER MANAGEMENT</h2>
         <p>Manage all users in one place.Control access and monitor activity across your platform.</p>
     </div>
-
     <button id="add-user" onclick="window.location.href='addUserForm.php'">+ Add User</button>
     
     <?php if($users): ?> <!-- if user array has values -->
@@ -86,39 +104,54 @@
             <?php foreach($users as $user): ?> <!-- Iterate each user inside the array -->
                 <tr>
                     <!-- htmlspecialchars for html injection -->
-                    <td><?php echo htmlspecialchars($user['id']); ?></td> 
+                    <td><?php echo htmlspecialchars($user['id']); ?></td>
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['created_at']); ?></td>
-                    <td id="action-column_update">
+                    <td class="action-column_update">
                         <!-- POST form with hidden inputs -->
                         <form action="updateForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                            <button id="update-user" type="submit">
+                            <button class="update-user" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
                             </button>
                         </form>
                     </td>
-                    <td id="action-column_delete">
+                    <td class="action-column_delete">
                         <!-- POST form with hidden inputs -->
                         <form action="deleteForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                            <button id="delete-user" type="submit">
+                            <button class="delete-user" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                             </button>
-                        </form>    
+                        </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
 
+    <button id="view-gallery" onclick="window.location.href='gallery.php'">Gallery</button>
+    <button id="logout-button" 
+    onclick="
+        if(confirm('Are you sure you want to logout?')){
+            logout();
+            window.location.href='logout.php';
+        }
+    ">Logout </button>
+
     <!-- Toast message -->
     <div id="display-validation">
-        <p id="display-validation_message">hatdog</p>
+        <p id="display-validation_message"></p>
     </div> 
+
+    <!-- Welcome message -->
+    <div id="display-welcome">
+        <button id="close-welcome-button" onclick="closeWelcomeMessage()">X</button>
+        <p id="display-welcome_message"></p>
+    </div>
     
     <script src="function.js"></script>
     <script>
@@ -127,6 +160,30 @@
                 toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
             });
         <?php endif; ?>
+        <?php if ($welcomeMessage): ?> // If there's a welcome message to display
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                openWelcomeMessage("<?= $welcomeMessage ?>"); // Call the function to display the welcome message
+            });
+        <?php $welcomeMessage = null;?>
+        <?php endif; ?>
+
+        document.getElementById("close-welcome-button").addEventListener("click", () => { //checks if the button was clicked
+            sessionStorage.setItem("isWelcomeClosed", "true"); //set a session variable to be true 
+            if(sessionStorage.getItem("isWelcomeClosed") === "true"){ //evaluates if the welcome message is gone
+                document.getElementById("display-welcome").style.pointerEvents = "none"; //prevents the welcome message from interfering with pointers
+            }
+        });
+        
+        window.onload = () => {//after the page loads do this
+            if(sessionStorage.getItem("isWelcomeClosed") === "true"){ //after user close the welcome message
+                document.getElementById("display-welcome").style.pointerEvents = "none"; //prevents the welcome message from interfering the pointers
+            }
+        }
+
+        function logout(){ //clears the storage after logout
+            sessionStorage.clear();
+        }
+
     </script>
 </body>
 </html>

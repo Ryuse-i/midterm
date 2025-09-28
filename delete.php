@@ -29,8 +29,9 @@
             
         }catch(PDOException $error){
             header('Location: dashboard.php?action=update_failed');
-            die("ERROR: " . $error->getMessage());
+            throw $error;
         }
+    
 
         // Redirect based on the result of the delete operation
         if($rows > 0){ // If rows were affected (deleted)

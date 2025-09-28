@@ -4,11 +4,29 @@ body{
  margin: 0px;
 }
 
+#overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* dark background */
+    backdrop-filter: blur(6px);  /* blur the background */
+    opacity: 0;
+    pointer-events: none; /* prevent blocking clicks when hidden */
+    transition: opacity 0.4s ease;
+    z-index: 999; /* behind popup, above content */
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #Form-head{
-    color: white;
     text-align: center;
     margin-top: 100px;
     font-family: inherit;
+    color: white;
 }
 
 #user-form{
@@ -90,7 +108,7 @@ table{
     border: 1px solid white;
 }
 
-#action-column_update , #action-column_delete{
+.action-column_update , .action-column_delete{
     text-align: center;
 }
 
@@ -144,7 +162,7 @@ th{
 }
         
 
-#update-user , #delete-user{
+.update-user , .delete-user{
     border-radius: 20px;
     height: 30px;
     width: 70px;
@@ -154,16 +172,16 @@ th{
     
 }
 
-#update-user:hover{
+.update-user:hover{
     transform: scale(1.06);
     background-color:  rgb(51, 65, 170);
 }
 
-#delete-user{
+.delete-user{
     background-color: rgb(242, 77, 77);
 }
 
-#delete-user:hover{
+.delete-user:hover{
     transform: scale(1.06);
     background-color: rgb(170, 51, 51);
 }
@@ -183,7 +201,7 @@ p {
    text-align: center;
 }
 
-#back-dashboard {
+#back-dashboard, #view-gallery {
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
@@ -196,7 +214,9 @@ p {
     left: 10px;
 }
 
-#back-dashboard:hover {
+
+
+#back-dashboard:hover, #view-gallery:hover {
     transform: scale(1.05);
     background-color: rgb(217, 204, 204);
 }
@@ -215,4 +235,144 @@ p {
 
 #register-link:hover, #login-link:hover {
     text-decoration: underline;
+}
+
+input[type="file"] {
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="file"]::file-selector-button{
+    width: 120px;
+    height: 40px;
+    background-color: orangered;
+    color: white;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+}
+
+input[type="file"]::file-selector-button:hover{
+    background-color: rgb(176, 54, 9);
+    cursor: pointer;
+}
+
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+     grid-auto-rows: 200px; 
+    gap: 15px; 
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.gallery-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* removes default inline gap */
+    
+}
+
+.gallery-item:hover{
+    border: 3px solid #ccc;
+}
+
+#upload-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+
+
+#upload-image{
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: transform ease 0.2s;
+}
+
+#upload-image:hover{
+    background-color: rgb(217, 204, 204);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#display-welcome{
+    position: fixed;          
+    top: 60%;                 
+    left: 50%;                
+    transform: translate(-50%, -50%)scale(0.8);
+    z-index: 9999;
+    width: 50%;
+    height:30%; 
+    background-color: rgb(217, 252, 251);
+    border: 1px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#display-welcome_message{
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#close-welcome-button{
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background-color: rgb(245, 147, 129);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    border-radius: 7px;
+}
+
+#close-welcome-button:hover{
+    background-color: rgb(255, 94, 66);
+    transform: scale(1.1);
+}
+
+#display-welcome.welcome-message_push {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#logout-button{
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+
+#logout-button:hover{
+    transform: scale(1.05);
+    background-color: rgb(217, 204, 204);
 }
