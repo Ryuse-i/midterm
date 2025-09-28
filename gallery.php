@@ -25,11 +25,15 @@
     </div>
 
     <div id="gallery">
-        <?php foreach($files as $file): ?>
-        <div class="gallery-item">
-            <img src="<?php echo $dir . $file; ?>" alt="<?php echo $file ?>">
-        </div>
-        <?php endforeach ?>
+        <?php if($files): ?>
+            <?php foreach($files as $file): ?>
+            <div class="gallery-item">
+                <img src="<?php echo $dir . $file; ?>" alt="<?php echo $file ?>">
+            </div>
+            <?php endforeach ?>
+        <?php else : ?>
+            <h2>No items</h2>
+        <?php endif ?>
     </div>
 </body>
 </html>

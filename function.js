@@ -50,7 +50,9 @@ function openWelcomeMessage($message) {
     // fallback release in case close never fires
     setTimeout(() => {
         pageContent.classList.remove("active");
-        welcomeMessage.classList.remove("welcome-message_push")
+        welcomeMessage.classList.remove("welcome-message_push");
+        sessionStorage.setItem("isWelcomeClosed", "true");
+        welcomeMessage.style.pointerEvents = "none";
     }, 10000);
 }
 

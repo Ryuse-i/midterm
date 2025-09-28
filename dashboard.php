@@ -7,11 +7,6 @@
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token if not already set
     }
 
-    //forces the browser not to store a cache of this page
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Pragma: no-cache");
-    header("Expires: 0"); 
 
     // Check if user is logged in
     if(!isset($_SESSION['user']) && empty($_SESSION['user'])){
@@ -152,6 +147,7 @@
         <p id="display-validation_message"></p>
     </div> 
 
+    <!-- Welcome message -->
     <div id="display-welcome">
         <button id="close-welcome-button" onclick="closeWelcomeMessage()">X</button>
         <p id="display-welcome_message"></p>
@@ -171,20 +167,20 @@
         <?php $welcomeMessage = null;?>
         <?php endif; ?>
 
-        document.getElementById("close-welcome-button").addEventListener("click", () => {
-            sessionStorage.setItem("isWelcomeClosed", "true"); 
-            if(sessionStorage.getItem("isWelcomeClosed") === "true"){
-                document.getElementById("display-welcome").style.pointerEvents = "none";
+        document.getElementById("close-welcome-button").addEventListener("click", () => { //checks if the button was clicked
+            sessionStorage.setItem("isWelcomeClosed", "true"); //set a session variable to be true 
+            if(sessionStorage.getItem("isWelcomeClosed") === "true"){ //evaluates if the welcome message is gone
+                document.getElementById("display-welcome").style.pointerEvents = "none"; //prevents the welcome message from interfering with pointers
             }
         });
         
-        window.onload = () => {
-            if(sessionStorage.getItem("isWelcomeClosed") === "true"){
-                document.getElementById("display-welcome").style.pointerEvents = "none";
+        window.onload = () => {//after the page loads do this
+            if(sessionStorage.getItem("isWelcomeClosed") === "true"){ //after user close the welcome message
+                document.getElementById("display-welcome").style.pointerEvents = "none"; //prevents the welcome message from interfering the pointers
             }
         }
 
-        function logout(){
+        function logout(){ //clears the storage after logout
             sessionStorage.clear();
         }
 
