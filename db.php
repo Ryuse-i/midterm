@@ -5,9 +5,8 @@
     $username = "root";
     $password = "";
 
-    define('APP_ROOT', __DIR__ . '/app_log.txt');
+    define('APP_LOG', __DIR__ . '/app_log.txt');
 
-    echo APP_LOG;
     set_error_handler("logErrorMessage");
     set_exception_handler("logException");
 
