@@ -847,3 +847,14 @@
 [2025-09-30 02:23:34] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
 [2025-09-30 02:24:52] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
 [2025-09-30 02:26:05] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 96
+[2025-09-30 04:43:04]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-30 04:43:50] Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'role' in 'where clause' in C:\xampp\htdocs\midterm\pages\admin\dashboard.php on line 33
+[2025-09-30 04:45:12] Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user' in 'where clause' in C:\xampp\htdocs\midterm\pages\admin\dashboard.php on line 33
+[2025-09-30 06:35:17]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 44
+[2025-09-30 06:38:48]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 44
+[2025-09-30 06:38:48]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 49
+[2025-09-30 06:41:12]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 45
+[2025-09-30 06:41:12]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 50
+[2025-09-30 06:46:47]Type: 2 | Message: Undefined array key "roles" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 49
+[2025-09-30 06:47:01]Type: 2 | Message: Undefined array key "roles" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 49
+[2025-09-30 07:22:04]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17

@@ -28,7 +28,7 @@
 
     // Fetch all users from the database
     try{
-        $sql = 'SELECT * FROM users WHERE role = user';
+        $sql = 'SELECT * FROM users WHERE roles = "user"';
         $statement = $pdo->prepare($sql);
         $statement->execute();
 

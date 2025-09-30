@@ -42,6 +42,8 @@ p{
     font-size: 20px;
 }
 
+
+
 input[type="password"],
 input[type="text"],
 input[type="email"] {
@@ -376,3 +378,36 @@ input[type="file"]::file-selector-button:hover{
     transform: scale(1.05);
     background-color: rgb(217, 204, 204);
 }
+
+
+#user-profile {
+    background-color: rgb(9, 9, 9);
+    max-width: 1000px;
+    width: 90%;
+    margin: 100px auto;
+    border: 1px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 60px; 
+    color: white;
+}
+
+.text-info {
+    text-align: left;
+    
+}
+
+.image {
+    flex-shrink: 0;
+    margin-right: 30px;  
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+
