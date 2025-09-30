@@ -14,11 +14,13 @@
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
+        $role = $_POST['role'];
+
 
         // Server-side input validation 
 
         //Check for empty fields
-        if(empty($name) || empty($email) || empty($password)){
+        if(empty($name) || empty($email) || empty($password) || empty($role)){
             header('Location: ../pages/registerForm.php?user=empty_fields');
             exit;
         }
@@ -26,7 +28,7 @@
         //Password validations
         // Check for minimum length
         if(strlen($password) < 8){
-            header('Location: ../registerForm.php?user=pass_short');
+            header('Location: ../pages/registerForm.php?user=pass_short');
             exit;
         }
 
@@ -76,15 +78,17 @@
         } catch(PDOException $error){
             throw $error;
         }
+        
 
         // If user does not exist, insert new user
         if(!$user){
             try{
-                $sql = 'INSERT INTO users (name, email, password) VALUES (:name, :email, :password)';
+                $sql = 'INSERT INTO users (name, email, password, roles) VALUES (:name, :email, :password, :role)';
                 $statement = $pdo->prepare($sql);
                 $statement->bindValue(":name", $cleanName, PDO::PARAM_STR);
                 $statement->bindValue(":email", $validEmail, PDO::PARAM_STR);
                 $statement->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
+                $statement->bindValue(":role", $role, PDO::PARAM_STR);
                 $statement->execute();
 
                 // Regenerate session ID to prevent session fixation attacks
@@ -94,11 +98,12 @@
                     'id' => $pdo->lastInsertId(),
                     'name' => $cleanName,
                     'email' => $validEmail,
+                    'role' => $role,
                     'register' => true,
                     'login' => false
                 ];
 
-                header('Location: ../pages/dashboard.php');
+                header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
                 exit;
             }catch(PDOException $error){
                 throw $error;

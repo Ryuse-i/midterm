@@ -811,3 +811,39 @@
 [2025-09-28 16:38:13] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
 [2025-09-28 16:38:25] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'system_db.user' doesn't exist in C:\xampp\htdocs\midterm\pages\dashboard.php on line 33
 [2025-09-28 16:41:49]Type: 2 | Message: Undefined array key "hatdog" | File: C:\xampp\htdocs\midterm\pages\dashboard.php | Line: 24
+[2025-09-29 14:14:39] Exception: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in C:\xampp\htdocs\midterm\db.php on line 15
+[2025-09-29 14:15:22]Type: 2 | Message: Undefined array key "name" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:22]Type: 8192 | Message: trim(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:22]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 15
+[2025-09-29 14:15:22]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 46
+[2025-09-29 14:15:29]Type: 2 | Message: Undefined array key "name" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:29]Type: 8192 | Message: trim(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:29]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 15
+[2025-09-29 14:15:30]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 46
+[2025-09-29 14:15:43]Type: 2 | Message: Undefined array key "name" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:43]Type: 8192 | Message: trim(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:43]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 46
+[2025-09-29 14:15:48]Type: 2 | Message: Undefined array key "name" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:48]Type: 8192 | Message: trim(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\login.php | Line: 12
+[2025-09-29 14:15:48]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 46
+[2025-09-29 14:29:14]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-29 14:29:14] Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'role' in 'where clause' in C:\xampp\htdocs\midterm\process\register.php on line 75
+[2025-09-29 14:29:54] Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'role' in 'where clause' in C:\xampp\htdocs\midterm\process\register.php on line 75
+[2025-09-29 14:30:52]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-29 14:31:01] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 91
+[2025-09-29 14:33:08]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-29 14:33:48]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-29 14:34:39] Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'role' in 'where clause' in C:\xampp\htdocs\midterm\pages\admin\dashboard.php on line 33
+[2025-09-30 02:14:44]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\login.php | Line: 14
+[2025-09-30 02:15:22] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 91
+[2025-09-30 02:16:53]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-30 02:16:58] Exception: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in C:\xampp\htdocs\midterm\process\register.php on line 75
+[2025-09-30 02:18:18] Exception: Call to undefined function dd() in C:\xampp\htdocs\midterm\process\register.php on line 19
+[2025-09-30 02:18:25] Exception: Call to undefined function dd() in C:\xampp\htdocs\midterm\process\register.php on line 19
+[2025-09-30 02:20:35] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 93
+[2025-09-30 02:22:53] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
+[2025-09-30 02:22:58] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
+[2025-09-30 02:23:28]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\register.php | Line: 17
+[2025-09-30 02:23:34] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
+[2025-09-30 02:24:52] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 94
+[2025-09-30 02:26:05] Exception: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'user1@gmail.com' for key 'email' in C:\xampp\htdocs\midterm\process\register.php on line 96

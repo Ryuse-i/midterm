@@ -79,6 +79,12 @@ if (isset($_GET['user'])) { // Check if there's a 'user' parameter in the URL
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
         title="Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
         ><br><br>
+        <label for="role">ROLE</lable>
+        <select name="role" id="role" required>
+            <option value="none" disabled selected>None</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
         <button type="submit" id="submit-form">Register</button> 
     </form>
 
