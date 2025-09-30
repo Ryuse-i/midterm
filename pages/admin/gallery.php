@@ -1,6 +1,13 @@
 <?php
-    $dir = "../../uploads/"; // folder where files are saved
-    $files = array_diff(scandir($dir), array('.', '..'));
+session_start();
+    $dir = "../../uploads/gallery/"; // folder where files are saved
+    $files = glob($dir . $_SESSION['user']['id'] . "_*"); //grabs all the files that has the user id
+
+    // Check if user is logged in
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== "admin"){
+        header('Location: ../loginForm.php');
+        exit;
+    }
     
 ?>
 
@@ -14,7 +21,7 @@
 </head>
 <body>
     <div>
-        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Profile</button>
     </div>
     <div id="Form-head">
         <h1>GALLERY</h1>

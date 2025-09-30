@@ -39,14 +39,14 @@
     </div>
 
     <!-- User form with user details -->
-    <form id="user-form" action="../process/update.php" method="POST">
+    <form id="user-form" action="../../process/updateProfile.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <input type="text" name="id" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" hidden>
         <label for="name">Name</label> <br>
         <input type="text" name="name" value="<?php echo htmlspecialchars($_SESSION['user']['name']); ?>" required><br><br>
         <label for="email">Email</label> <br>
         <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['user']['email']); ?>" required><br><br>
-        <button id="submit-form" type="submit">Submit</button>
+        <button onclick="return confirm('Are you sure you want to update your info?')" id="submit-form" type="submit">Submit</button>
     </form>
 
     <!-- Toast message -->

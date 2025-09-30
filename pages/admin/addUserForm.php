@@ -7,8 +7,8 @@
     }
 
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
-         header('Location: loginForm.php');
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
+         header('Location: ../loginForm.php');
          exit;
     }
 
@@ -71,7 +71,7 @@
 </head>
 <body>
     <div>
-        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+        <button id="back-dashboard" onclick="window.location.href='viewUsers.php'">Back to Users table</button>
     </div>
     <div id="Form-head">
         <h1>Add User</h1>

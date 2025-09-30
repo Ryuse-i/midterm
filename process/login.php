@@ -12,7 +12,7 @@
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        if(empty($email) || empty($password) || empty($role)){
+        if(empty($email) || empty($password)){
             header('Location: ../pages/loginForm.php?user=empty_fields');
             exit;
         }
@@ -42,13 +42,19 @@
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'role' => $user['roles'],
+                'profile_picture' => $user['profile_picture'],
                 'login' => true,
                 'register' => false
             ];
 
-            header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
+         
+            if($user['roles'] == "admin"){
+                header('Location: ../pages/admin/viewUsers.php');
+            }else{
+                header('Location: ../pages/user/dashboard.php');
+            }
             exit;
-        }
+        }       
         else{
             header('Location: ../pages/loginForm.php?user=incorrect_credentials');
             exit;

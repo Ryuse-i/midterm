@@ -8,8 +8,8 @@
     }
 
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
-        header('Location: loginForm.php');
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
+        header('Location: ../loginForm.php');
         exit;
     }
 
@@ -53,7 +53,7 @@
 </head>
 <body>
     <div>
-        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+        <button id="back-dashboard" onclick="window.location.href='viewUsers.php'">Back to User table</button>
     </div>
     <div id="Form-head">
         <h1>Delete User</h1>
@@ -69,7 +69,7 @@
         <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" readonly><br><br>
         <label for="email">Email</label> <br>
         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" readonly><br><br>
-        <button id="submit-form" type="submit">Delete</button>
+        <button onclick="return confirm('Are you sure you want to delete this user?')" id="submit-form" type="submit">Delete</button>
     </form>
 </body>
 </html>
