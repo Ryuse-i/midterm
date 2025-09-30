@@ -12,7 +12,7 @@
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        if(empty($email) || empty($password) || empty($role)){
+        if(empty($email) || empty($password)){
             header('Location: ../pages/loginForm.php?user=empty_fields');
             exit;
         }
@@ -48,7 +48,7 @@
 
             header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
             exit;
-        }
+        }       
         else{
             header('Location: ../pages/loginForm.php?user=incorrect_credentials');
             exit;
