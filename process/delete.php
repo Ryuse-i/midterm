@@ -5,7 +5,7 @@
 
     //check if user is logged in
     if(!isset($_SESSION['user'])){
-        header('Location: ../pages/admin/loginForm.php');
+        header('Location: ../pages/loginForm.php');
         exit;
     }
 
@@ -14,7 +14,7 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         // CSRF token validation
         if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-            header('Location: ../pages/admin/dashboard.php?user=csrf_error');
+            header('Location: ../pages/admin/viewUsers.php?user=csrf_error');
             exit;
         }
         $id = $_POST['user_id'];
@@ -28,25 +28,25 @@
             $rows = $statement->rowCount(); // checking if any rows are affected
             
         }catch(PDOException $error){
-            header('Location: ../pages/admin/dashboard.php?action=update_failed');
+            header('Location: ../pages/admin/viewUsers.php?action=update_failed');
             throw $error;
         }
     
 
         // Redirect based on the result of the delete operation
         if($rows > 0){ // If rows were affected (deleted)
-            header('Location: ../pages/admin/dashboard.php?action=delete_success');
+            header('Location: ../pages/admin/viewUsers.php?action=delete_success');
             exit;
         }
         elseif($rows === 0){ // If no rows were affected (no record found)
-            header('Location: ../pages/admin/dashboard.php?action=no_record');
+            header('Location: ../pages/admin/viewUsers.php?action=no_record');
             exit;
         }else{ // Other errors
-            header('Location: ../pages/admin/dashboard.php?action=update_failed');
+            header('Location: ../pages/admin/viewUsers.php?action=update_failed');
             exit;
         }
     }else{
-        header('Location: ../pages/admin/dashboard.php?action=no_record');
+        header('Location: ../pages/admin/viewUsers.php?action=no_record');
         exit;
     }
 ?>

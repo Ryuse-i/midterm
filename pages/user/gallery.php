@@ -1,6 +1,12 @@
 <?php
-    $dir = "../../uploads/"; // folder where files are saved
-    $files = array_diff(scandir($dir), array('.', '..'));
+    session_start();
+    
+    if(!isset($_SESSION['user'])){
+        header("Location: ../loginForm.php");
+    }
+
+    $dir = "../../uploads/gallery/"; // folder where files are saved
+    $files = glob($dir . $_SESSION['user']['id'] . "_*"); //grabs all the files that has the user id
     
 ?>
 
@@ -9,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
     <title>Document</title>
 </head>
 <body>

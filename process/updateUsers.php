@@ -13,7 +13,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // CSRF token validation
         if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-            header('Location: ../pages/admin/dashboard.php?user=csrf_error');
+            header('Location: ../pages/admin/viewUsers.php?user=csrf_error');
             exit;
         }
 
@@ -23,7 +23,7 @@
 
         // Server-side input validation for email
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            header('Location: ../pages/admin/dashboard.php?user=invalid_email');
+            header('Location: ../pages/admin/viewUsers.php?user=invalid_email');
         }
 
         // Sanitize inputs
@@ -41,18 +41,18 @@
 
             $rows = $statement->rowCount();
         }catch(PDOException $error){
-            header('Location: ../pages/admin/dashboard.php?action=update_failed');
+            header('Location: ../pages/admin/viewUsers.php?action=update_failed');
             throw $error;
         }
 
 
         // Redirect based on the result of the update operation
         if($rows > 0){ // If rows were affected (updated)
-            header('Location: ../pages/admin/dashboard.php?action=update_success');
+            header('Location: ../pages/admin/viewUsers.php?action=update_success');
             exit;
         }
         elseif($rows === 0){ // If no rows were affected (no changes made)
-            header('Location: ../pages/admin/dashboard.php?action=no_changes');
+            header('Location: ../pages/admin/viewUsers.php?action=no_changes');
             exit;
         }
     }

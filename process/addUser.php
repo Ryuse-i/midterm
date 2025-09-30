@@ -106,7 +106,7 @@
 
         // Redirect based on the result of the insert operation
         if($row > 0){ // If rows were affected (inserted)
-            header('Location: ../pages/admin/dashboard.php?action=add_success');
+            header('Location: ../pages/admin/viewUsers.php?action=add_success');
             exit;
         } else {
             header('Location: ../pages/admin/addUserForm.php?user=add_failed');

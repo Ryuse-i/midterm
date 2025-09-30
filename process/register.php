@@ -103,8 +103,14 @@
                     'login' => false
                 ];
 
-                header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
+                
+                if($role == "admin"){
+                    header('Location: ../pages/admin/viewUsers.php');
+                }else{
+                    header('Location: ../pages/user/dashboard.php');
+                }
                 exit;
+
             }catch(PDOException $error){
                 throw $error;
             }

@@ -42,11 +42,17 @@
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'role' => $user['roles'],
+                'profile_picture' => $user['profile_picture'],
                 'login' => true,
                 'register' => false
             ];
 
-            header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
+         
+            if($user['roles'] == "admin"){
+                header('Location: ../pages/admin/viewUsers.php');
+            }else{
+                header('Location: ../pages/user/dashboard.php');
+            }
             exit;
         }       
         else{

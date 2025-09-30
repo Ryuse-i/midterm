@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     require_once '../../db.php';
@@ -29,17 +28,17 @@
 <body>
 
     <div>
-        <button id="back-dashboard" onclick="window.location.href='viewUsers.php'">Back to User table</button>
+        <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to profile</button>
     </div>
 
 
     <div id="Form-head">
-        <h1>Update User</h1>
-       <p>Enter details below to update user information</p>
+        <h1>Update Profile</h1>
+       <p>Enter details below to update your information</p>
     </div>
 
     <!-- User form with user details -->
-    <form id="user-form" action="../../process/updateUsers.php" method="POST">
+    <form id="user-form" action="../../process/updateProfile.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
         <input type="text" name="id" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" hidden>
         <label for="name">Name</label> <br>

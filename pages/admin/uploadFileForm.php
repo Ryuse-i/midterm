@@ -6,8 +6,8 @@
     }
 
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
-        header('Location: loginForm.php');
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
+        header('Location: ../loginForm.php');
         exit;
     }
 
@@ -75,7 +75,7 @@
                 <span>Choose a file or drag it here</span>
             </label>
             <input class="file-input" type="file" name="uploadedFile" id="uploadedFile" accept="image/jpeg,image/png,image/jpg" required>
-            <p class="file-info">Maximum file size: 2MB. <br> Allowed formats: JPG, JPEG, PNG</p>
+            <p class="file-info">Maximum file size: 5MB. <br> Allowed formats: JPG, JPEG, PNG</p>
             <button id="submit-form" type="submit">Upload Image</button> 
         </form>
     </div>

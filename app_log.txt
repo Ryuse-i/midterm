@@ -1,0 +1,18 @@
+[2025-09-30 15:28:26]Type: 2 | Message: Undefined variable $id | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 54
+[2025-09-30 15:37:16] Exception: Undefined constant "check" in C:\xampp\htdocs\midterm\process\uploadProfile.php on line 46
+[2025-09-30 15:51:09]Type: 2 | Message: Undefined variable $heh | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 33
+[2025-09-30 15:51:16]Type: 2 | Message: Undefined variable $heh | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 33
+[2025-09-30 15:53:50]Type: 2 | Message: Undefined variable $uploadFile | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 24
+[2025-09-30 15:53:50]Type: 8192 | Message: pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 24
+[2025-09-30 15:54:43]Type: 2 | Message: Undefined variable $uploadFile | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 24
+[2025-09-30 15:54:43]Type: 8192 | Message: pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated | File: C:\xampp\htdocs\midterm\process\uploadProfile.php | Line: 24
+[2025-09-30 17:02:00] Exception: unlink(): Argument #1 ($filename) must be of type string, array given in C:\xampp\htdocs\midterm\process\deleteAccount.php on line 34
+[2025-09-30 18:00:02]Type: 2 | Message: Undefined variable $user | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 71
+[2025-09-30 18:00:02]Type: 2 | Message: Trying to access array offset on value of type null | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 71
+[2025-09-30 18:00:02]Type: 8192 | Message: htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 71
+[2025-09-30 18:00:02]Type: 2 | Message: Undefined variable $user | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 73
+[2025-09-30 18:00:02]Type: 2 | Message: Trying to access array offset on value of type null | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 73
+[2025-09-30 18:00:02]Type: 8192 | Message: htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 73
+[2025-09-30 18:00:02]Type: 2 | Message: Undefined variable $user | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75
+[2025-09-30 18:00:02]Type: 2 | Message: Trying to access array offset on value of type null | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75
+[2025-09-30 18:00:02]Type: 8192 | Message: htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75

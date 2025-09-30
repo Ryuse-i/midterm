@@ -19,10 +19,10 @@
             exit;
         }
 
-        $uploadDir = '../uploads/';
+        $uploadDir = '../uploads/gallery/';
         $uploadFile = $uploadDir . $_SESSION['user']['id'] . '_' . basename($_FILES['uploadedFile']['name']);
         $fileExtension = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
-        $maxFileSize = 2 * 1024 * 1024; // 2MB
+        $maxFileSize = 5 * 1024 * 1024; // 5MB
         
         //check if the file already exists 
         if (file_exists($uploadFile)) {
