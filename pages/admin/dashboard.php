@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once '../db.php';
+    require_once '../../db.php';
 
     // CSRF token validation
     if(!isset($_SESSION['csrf_token'])){
@@ -28,7 +28,7 @@
 
     // Fetch all users from the database
     try{
-        $sql = 'SELECT * FROM users';
+        $sql = 'SELECT * FROM users WHERE role = user';
         $statement = $pdo->prepare($sql);
         $statement->execute();
 
@@ -79,7 +79,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -136,7 +136,7 @@
     onclick="
         if(confirm('Are you sure you want to logout?')){
             logout();
-            window.location.href='../process/logout.php';
+            window.location.href='../../process/logout.php';
         }
     ">Logout </button>
 
@@ -151,7 +151,7 @@
         <p id="display-welcome_message"></p>
     </div>
     
-    <script src="../resources/js/function.js"></script>
+    <script src="../../resources/js/function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?> // If there's a message to display
             document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load

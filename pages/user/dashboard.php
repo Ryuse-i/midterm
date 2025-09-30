@@ -13,7 +13,11 @@
 <body>
     <div id="user-profile">
         <div id="user-profile_image">
-            <img src="<?php echo $_SESSION['user']['profile_picture'] ?>" alt="Profile Picture">
+            <?php if(isset($_SESSION['user']['profile_picture']) && !empty($_SESSION['user']['profile_picture'])): ?>
+                <img src="<?php echo $_SESSION['user']['profile_picture'] ?>" alt="Profile Picture">
+            <?php else: ?>
+                <img src="../../uploads/no_profile" alt="">
+            <?php endif ?>
         </div>
         <div id="user-profile_info">
             <h2><?php echo $_SESSION['user']['name'] ?></h2>

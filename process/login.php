@@ -9,11 +9,10 @@
             exit;
         }
     
-        $name = trim($_POST['name']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        if(empty($name) || empty($email) || empty($password)){
+        if(empty($email) || empty($password) || empty($role)){
             header('Location: ../pages/loginForm.php?user=empty_fields');
             exit;
         }
@@ -25,9 +24,8 @@
 
 
         try{
-            $sql = 'SELECT * FROM users WHERE name = :name AND email = :email';
+            $sql = 'SELECT * FROM users WHERE email = :email';
             $statement = $pdo->prepare($sql);
-            $statement->bindValue(":name", $name, PDO::PARAM_STR);
             $statement->bindValue(":email", $email, PDO::PARAM_STR);
             $statement->execute();
 
@@ -43,11 +41,12 @@
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
+                'role' => $user['role'],
                 'login' => true,
                 'register' => false
             ];
 
-            header('Location: ../pages/dashboard.php');
+            header('Location: ../pages/' . $_SESSION['user']['role'] . '/dashboard.php');
             exit;
         }
         else{
