@@ -93,6 +93,11 @@
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}"
         title="Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
         ><br><br>
+        <select name="role" id="role" required>
+            <option value="none" disabled selected>None</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select> <br> <br>
         <button type="submit" id="submit-form">Add User</button> 
     </form>
 
