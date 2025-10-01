@@ -98,10 +98,7 @@
         <form id="delete-account-form"action="../../process/deleteAccount.php" method="post">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="hidden" name="id" value="<?php echo $_SESSION['user']['id'] ?>">
-            <button onclick="if(confirm('Are you sure you want to delete your account?')){
-                logout();
-            }"
-            id="delete-account" type="submit">Delete Account</button>
+            <button id="delete-account" type="submit">Delete Account</button>
         </form>
     </div>
 
@@ -144,6 +141,15 @@
                 document.getElementById("display-welcome").style.pointerEvents = "none"; //prevents the welcome message from interfering the pointers
             }
         }
+
+        document.getElementById("delete-account").addEventListener("click", function (e) {
+            if (confirm("Are you sure you want to delete this account?")) {
+                logout();
+            }else{
+                e.preventDefault(); // stop form submit
+            }
+        });
+
         function logout(){ //clears the storage after logout
             sessionStorage.clear();
         }

@@ -51,7 +51,7 @@
 
     <!-- Toast message -->
     <div id="display-validation">
-        <p id="display-validation_message">hatdog</p>
+        <p id="display-validation_message"></p>
     </div>
     
     <script src="../resources/js/function.js"></script>

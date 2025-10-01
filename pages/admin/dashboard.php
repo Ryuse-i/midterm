@@ -5,6 +5,30 @@
     if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
         header("Location: ../loginForm.php");
     }
+    // Check for messages in the URL parameters
+    $toastMessage = null;
+    $toastType = null;
+    if(isset($_GET['action'])){ // Check if there's an 'action' parameter in the URL
+        switch($_GET['action']){
+            case 'update_success':
+                $toastMessage = "Updated successfully!";
+                $toastType = "success";
+                break;
+            case 'no_changes':
+                $toastMessage = "No changes were made.";
+                $toastType = "warning";
+                break;
+            case 'update_failed':
+                $toastMessage = "Failed to update. Please try again.";
+                $toastType = "error";
+                break;
+            case 'csrf_error':
+                $toastMessage = "There was someting wrong with your request. Please try again.";
+                $toastType = "error";
+                break;
+        }
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -47,11 +71,31 @@
         <form id="delete-account-form"action="../../process/deleteAccount.php" method="post">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="hidden" name="id" value="<?php echo $_SESSION['user']['id'] ?>">
-            <button onclick="logout()" id="delete-account" type="submit">Delete Account</button>
+            <button id="delete-account" type="submit">Delete Account</button>
         </form>
     </div>
 
+    <!-- Toast message -->
+    <div id="display-validation">
+        <p id="display-validation_message">hatdog</p>
+    </div>
+    
+    <script src="../../resources/js/function.js"></script>
     <script>
+        <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
+            document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load
+                toasterDisplay("<?= $toastMessage ?>", "<?= $toastType ?>"); // Call the function to display the toast
+            });
+        <?php endif; ?>
+
+        document.getElementById("delete-account").addEventListener("click", function (e) {
+            if (confirm("Are you sure you want to delete this account?")) {
+                logout();
+            }else{
+                e.preventDefault(); // stop form submit
+            }
+        });
+
         function logout(){ //clears the storage after logout
             sessionStorage.clear();
         }

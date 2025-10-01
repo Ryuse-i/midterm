@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     require_once '../../db.php';
@@ -11,10 +10,38 @@
 
 
     // Check if user is logged in
-    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
-        header('Location: ../loginForm.php');
+    if(!isset($_SESSION['user'])){
+        header('Location: loginForm.php');
         exit;
-    }    
+    }
+
+    
+
+    // Fetch user details if user_id is provided
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        
+        // CSRF token validation
+        if(!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            header('Location: viewUsers.php?user=csrf_error');
+            exit;
+        }
+
+        $id = $_POST['user_id'];
+
+        // Fetch user details from the database
+        try{
+            $sql = 'SELECT * FROM users WHERE id = :id';
+            $statement = $pdo->prepare($sql);
+            $statement->bindValue(':id', $id, PDO::PARAM_INT);
+            $statement->execute();
+
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+        }catch(PDOException $error){
+            throw $error;
+        }
+    }
+
+   
 ?>
 
 
@@ -34,19 +61,19 @@
 
 
     <div id="Form-head">
-        <h1>Update User</h1>
-       <p>Enter details below to update user information</p>
+        <h1>Update User </h1>
+       <p>Enter user details below to update user information</p>
     </div>
 
     <!-- User form with user details -->
     <form id="user-form" action="../../process/updateUsers.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> <!-- Hidden input to send csrf token -->
-        <input type="text" name="id" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" hidden>
+        <input type="text" name="id" value="<?php echo htmlspecialchars($user['id']); ?>" hidden>
         <label for="name">Name</label> <br>
-        <input type="text" name="name" value="<?php echo htmlspecialchars($_SESSION['user']['name']); ?>" required><br><br>
+        <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required><br><br>
         <label for="email">Email</label> <br>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['user']['email']); ?>" required><br><br>
-        <button onclick="return confirm('Are you sure you want to update your info?')" id="submit-form" type="submit">Submit</button>
+        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required><br><br>
+        <button onclick="return confirm('Are you sure you want to update this?')" id="submit-form" type="submit">Submit</button>
     </form>
 
     <!-- Toast message -->
@@ -54,7 +81,7 @@
         <p id="display-validation_message">hatdog</p>
     </div>
     
-    <script src="../resources/js/function.js"></script>
+    <script src="../../resources/js/function.js"></script>
     <script>
         <?php if (isset($toastMessage) && $toastMessage): ?> // Check if there's a message to display
             document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to load

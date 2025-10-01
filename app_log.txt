@@ -16,3 +16,4 @@
 [2025-09-30 18:00:02]Type: 2 | Message: Undefined variable $user | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75
 [2025-09-30 18:00:02]Type: 2 | Message: Trying to access array offset on value of type null | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75
 [2025-09-30 18:00:02]Type: 8192 | Message: htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated | File: C:\xampp\htdocs\midterm\pages\admin\updateForm.php | Line: 75
+[2025-10-01 07:33:31]Type: 2 | Message: Undefined array key "role" | File: C:\xampp\htdocs\midterm\process\addUser.php | Line: 22
