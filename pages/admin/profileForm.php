@@ -27,7 +27,7 @@
 </head>
 <body>
 
-    <div>
+    <div> <!-- back to profile -->
         <button id="back-dashboard" onclick="window.location.href='dashboard.php'">Back to profile</button>
     </div>
 
