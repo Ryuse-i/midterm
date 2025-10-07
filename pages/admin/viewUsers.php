@@ -36,6 +36,8 @@
     }catch(PDOException $error){
         throw $error;
     }
+
+
     // Check for messages in the URL parameters
     $toastMessage = null;
     $toastType = null;
@@ -83,14 +85,16 @@
     <title>Document</title>
 </head>
 <body>
+<!-- overlay for the blur in the welcome message -->
     <div id="overlay"></div>
     <div>
         <h2>USER MANAGEMENT</h2>
-        <p>Manage all users in one place.Control access and monitor activity across your platform.</p>
+        <p>Manage all users in one place. Control access and monitor activity across your platform.</p>
     </div>
     <button id="add-user" onclick="window.location.href='addUserForm.php'">+ Add User</button>
     
-    <?php if($users): ?> <!-- if user array has values -->
+    <!-- if user array has values -->
+    <?php if($users): ?> 
         <table>
             <tr id="row-border">
                 <th>ID</th>
@@ -101,14 +105,14 @@
             </tr>
             <?php foreach($users as $user): ?> <!-- Iterate each user inside the array -->
                 <tr>
-                    <!-- htmlspecialchars for html injection -->
+                    <!-- htmlspecialchars to prevent html injection -->
                     <td><?php echo htmlspecialchars($user['id']); ?></td>
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['created_at']); ?></td>
                     <td class="action-column_update">
                         <!-- POST form with hidden inputs -->
-                        <form action="updateForm.php" method="POST">
+                        <form action="updateUserForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button class="update-user" type="submit">
@@ -118,7 +122,7 @@
                     </td>
                     <td class="action-column_delete">
                         <!-- POST form with hidden inputs -->
-                        <form action="deleteForm.php" method="POST">
+                        <form action="deleteUserForm.php" method="POST">
                             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button class="delete-user" type="submit">

@@ -5,7 +5,7 @@
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
 
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "user"){
         header("Location: ../loginForm.php");
     }
 
@@ -74,7 +74,7 @@
             <p class="text-info">NAME: <?php echo $_SESSION['user']['name'] ?></p>
             <p class="text-info">EMAIL: <?php echo $_SESSION['user']['email']?></p>
             <p class="text-info">ROLE: <?php echo $_SESSION['user']['role']?></p>
-            <button id="update-profile" onclick="window.location.href='updateForm.php'">Update info</button>
+            <button id="update-profile" onclick="window.location.href='profileForm.php'">Update info</button>
         </div>
         <div id="user-profile_image">
             <?php if(isset($_SESSION['user']['profile_picture']) && !empty($_SESSION['user']['profile_picture'])): ?>

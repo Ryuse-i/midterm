@@ -67,6 +67,7 @@
         <p>Select an image to upload to the gallery</p>
     </div>
 
+    <!-- File upload form  -->
     <div class="form-container">
         <form id="user-form" action="../../process/uploadFile.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">

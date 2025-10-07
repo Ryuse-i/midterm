@@ -6,7 +6,7 @@
     }
 
     // Check if user is logged in
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "user"){
         header('Location: loginForm.php');
         exit;
     }

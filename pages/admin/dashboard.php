@@ -27,7 +27,6 @@
                 $toastType = "error";
                 break;
         }
-        
     }
 ?>
 
@@ -40,8 +39,11 @@
     <title>Dashboard</title>
 </head>
 <body>
+<!-- Redirection Links -->
     <button id="view-gallery" onclick="window.location.href='gallery.php'">Gallery</button>
     <button id="dashboard" onclick="window.location.href='viewUsers.php'">User table</button>
+
+    <!-- User Profile -->
     <div id="user-profile">
         <div id="user-profile_info">
             <p class="text-info">NAME: <?php echo $_SESSION['user']['name'] ?></p>
